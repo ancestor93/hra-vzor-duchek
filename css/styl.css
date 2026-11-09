@@ -1,0 +1,47 @@
+@font-face {
+    font-family: vera-type;
+    src: url(../fonts/vera_type/vVWweRraType!.ttf);
+}
+
+body {
+    background: #414042;
+    color: white;
+    font-family: vera-type;
+}
+
+header {
+    text-align: center;
+    align-content: center;
+    color: white;
+    background: #171717;
+    font-size: large;
+}
+
+main {
+    text-align: center;
+    align-content: center;
+    height: 750px;
+    width: auto;
+}
+
+img {
+    width: 600px;
+    height: 600px;
+}
+
+footer {
+
+    align-content: center;
+    text-align: center;
+    position: sticky;
+    color: white;
+    background: #171717;
+    height: 100px;
+}
+
+button {
+    font-family: vera-type;
+    font-size: larger;
+    height: fit-content;
+    width: 190px;
+}
