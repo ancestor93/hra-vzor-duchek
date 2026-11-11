@@ -60,6 +60,6 @@
 <path d="M-26 20 L-26 -22 L-10 -6 L10 -6 L26 -22 L26 20 L0 32 Z"/>
 <circle cx="-9" cy="8" r="2" fill="#ff0080"/><circle cx="9" cy="8" r="2" fill="#ff0080"/>
 </g>
-<text x="300" y="250" text-anchor="middle" font-family="monospace" font-weight="700" font-size="16" fill="#ff0080" filter="url(#g)" letter-spacing="4">KITSUNE</text>
+<text x="300" y="250" text-anchor="middle" font-family="monospace" font-weight="700" font-size="16" fill="#ff0080" filter="url(#g)" letter-spacing="4">KYUUBI</text>
 
 </svg>
