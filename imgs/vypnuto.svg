@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05030c"/><stop offset="1" stop-color="#050507"/></linearGradient>
+<filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="#00f5ff" stroke-opacity=".07"/></pattern>
+</defs>
+
+<!-- Animace přímo v SVG (funguje i v <img>):
+     implantáty se jeden po druhém přepnou z ONLINE na OFFLINE,
+     srdce jako poslední (s delší pauzou), pak zhasne liška a objeví se VYPNUTO -->
+<style>
+    /* steps(1, start) = přepne se hned na začátku animace.
+       Se steps(1, end) by kvůli zaokrouhlení (např. 1.5 s + 0.15 s) Chromium
+       občas nechal počáteční hodnotu a řádek by zůstal ONLINE. */
+    .on  { animation: zhasnout 0.15s steps(1, start) forwards; }
+    .off { fill-opacity: 0; animation: rozsvitit 0.15s steps(1, start) forwards; }
+    .r1 { animation-delay: 0.8s; }
+    .r2 { animation-delay: 1.5s; }
+    .r3 { animation-delay: 2.2s; }
+    .r4 { animation-delay: 2.9s; }
+    .r5 { animation-delay: 4.0s; }          /* srdce – dramatická pauza */
+    /* liška jemně pulzuje (je „živá“), pak zhasne */
+    .liska { animation: pulz 0.5s ease-in-out infinite alternate, liska-zhasne 1s ease-in 4.2s forwards; }
+    .konec { fill-opacity: 0; animation: rozsvitit 1s ease-out 4.6s forwards; }
+    @keyframes zhasnout     { to { fill-opacity: 0; } }
+    @keyframes rozsvitit    { to { fill-opacity: 1; } }
+    @keyframes pulz         { from { stroke-opacity: 1; } to { stroke-opacity: 0.6; } }
+    @keyframes liska-zhasne { to { stroke-opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+        .on, .off, .liska, .konec { animation: none; }
+        .on { fill-opacity: 0; }
+        .liska { stroke-opacity: 0; }
+        .off, .konec { fill-opacity: 1; }
+    }
+</style>
+
+<rect width="600" height="600" fill="url(#sky)"/>
+<rect width="600" height="600" fill="url(#grid)"/>
+
+<!-- ICE liška – ta to všechno vypíná -->
+<g class="liska" filter="url(#g)" fill="none" stroke="#ff2a00" stroke-width="3" stroke-linejoin="round" transform="translate(240 25) scale(0.5)">
+<path d="M0 0 L50 120 L120 100 L190 120 L240 0 L220 170 L120 260 L20 170 Z"/>
+<path d="M50 120 L120 260 L190 120 M20 170 L120 150 L220 170"/>
+<path d="M70 160 L95 170 M170 160 L145 170" stroke-width="5"/>
+</g>
+
+<text x="300" y="185" text-anchor="middle" font-family="monospace" font-weight="700" font-size="14" fill="#6b6f99" letter-spacing="4">// DIAGNOSTIKA KYBERWARU</text>
+
+<!-- implantáty: název + tečky vlevo, stav vpravo (ONLINE se přepne na OFFLINE) -->
+<g font-family="monospace" font-weight="700" font-size="19" letter-spacing="1">
+    <g fill="#cfd6ff">
+        <text x="70" y="235">OPTIKA KIROSHI ........</text>
+        <text x="70" y="275">NEURÁLNÍ PORT .........</text>
+        <text x="70" y="315">REFLEXNÍ POSILOVAČ ....</text>
+        <text x="70" y="355">PLICNÍ FILTR ..........</text>
+        <text x="70" y="395">SRDEČNÍ STIMULÁTOR ....</text>
+    </g>
+
+    <g fill="#00f5ff">
+        <text class="on r1" x="420" y="235">ONLINE</text>
+        <text class="on r2" x="420" y="275">ONLINE</text>
+        <text class="on r3" x="420" y="315">ONLINE</text>
+        <text class="on r4" x="420" y="355">ONLINE</text>
+        <text class="on r5" x="420" y="395">ONLINE</text>
+    </g>
+
+    <g fill="#ff2a00" filter="url(#g)">
+        <text class="off r1" x="420" y="235">OFFLINE</text>
+        <text class="off r2" x="420" y="275">OFFLINE</text>
+        <text class="off r3" x="420" y="315">OFFLINE</text>
+        <text class="off r4" x="420" y="355">OFFLINE</text>
+        <text class="off r5" x="420" y="395">OFFLINE</text>
+    </g>
+</g>
+
+<!-- závěr: chrom vypnutý, tělo bez něj nepřežije -->
+<g class="konec" font-family="monospace" font-weight="700" text-anchor="middle">
+    <text x="300" y="490" font-size="64" fill="#ff2a00" filter="url(#g)" letter-spacing="10">VYPNUTO</text>
+    <text x="300" y="535" font-size="17" fill="#6b6f99" letter-spacing="3">ŽIVOTNÍ FUNKCE: NEDETEKOVÁNY</text>
+</g>
+
+</svg>

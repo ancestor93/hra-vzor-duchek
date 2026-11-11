@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a0505"/><stop offset="1" stop-color="#050507"/></linearGradient>
+<filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="#00f5ff" stroke-opacity=".07"/></pattern>
+</defs>
+
+<!-- Animace je přímo v SVG – funguje i v <img>.
+     1) čára se kreslí zleva: dva normální údery, jeden slabý, pak rovná čára
+     2) až čára zplaní, objeví se FLATLINE a 00:00:00 -->
+<style>
+    .ekg {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation: kresleni 4s linear forwards;
+    }
+    .napis {
+        opacity: 0;
+        animation: objeveni 1s ease-out 3.6s forwards;
+    }
+    @keyframes kresleni {
+        to { stroke-dashoffset: 0; }
+    }
+    @keyframes objeveni {
+        to { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .ekg { animation: none; stroke-dashoffset: 0; }
+        .napis { animation: none; opacity: 1; }
+    }
+</style>
+
+<rect width="600" height="600" fill="url(#sky)"/>
+<rect width="600" height="600" fill="url(#grid)"/>
+
+<!-- pathLength="1000" = délka čáry se počítá jako 1000, proto dasharray/dashoffset 1000 -->
+<path class="ekg" pathLength="1000"
+      d="M0 300 H20 l10 -15 l10 15 h8 l8 -110 l10 190 l8 -80 h14 l12 -20 l12 20
+         H130 l10 -15 l10 15 h8 l8 -110 l10 190 l8 -80 h14 l12 -20 l12 20
+         H250 l6 -10 l6 10 h12 l6 -50 l10 90 l6 -40 H600"
+      fill="none" stroke="#ff2a00" stroke-width="4" stroke-linejoin="round" filter="url(#g)"/>
+
+<g class="napis">
+<text x="300" y="450" text-anchor="middle" font-family="monospace" font-weight="700" font-size="64" fill="#ff2a00" filter="url(#g)" letter-spacing="8">FLATLINE</text>
+<text x="300" y="500" text-anchor="middle" font-family="monospace" font-weight="700" font-size="24" fill="#6b6f99" letter-spacing="6">00:00:00</text>
+</g>
+
+</svg>

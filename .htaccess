@@ -1,0 +1,19 @@
+# =========================================================
+#  Cache – prohlížeč (i Cloudflare) se má u každého souboru
+#  zeptat serveru, jestli nemá novější verzi.
+#
+#  no-cache  = smí si soubor uložit, ale před použitím ho musí ověřit.
+#              Když se nezměnil, server odpoví jen „304 Not Modified“
+#              (nic se znovu nestahuje), když se změnil, pošle nový.
+#  Díky tomu se po úpravě hned ukáže nový obrázek / CSS
+#  a není potřeba Ctrl+F5.
+# =========================================================
+
+<IfModule mod_headers.c>
+    Header set Cache-Control "no-cache, must-revalidate"
+</IfModule>
+
+# vypnout případné výchozí „Expires“, které by říkalo „platí ještě X dní“
+<IfModule mod_expires.c>
+    ExpiresActive Off
+</IfModule>
