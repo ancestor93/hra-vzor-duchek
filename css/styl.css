@@ -44,4 +44,6 @@ button {
     font-size: larger;
     height: fit-content;
     width: 190px;
+    color: whitesmoke;
+    background: #171717;
 }
